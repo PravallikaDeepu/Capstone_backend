@@ -6,6 +6,7 @@ const CORS = require("cors")
 const Bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const cookieParser = require("cookie-parser")
+const port = process.env.PORT || 7070;
 
 app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
@@ -344,6 +345,8 @@ app.get("/profile/:id", async function(req,res)
 })
 
 
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
-app.listen(7070)
 
