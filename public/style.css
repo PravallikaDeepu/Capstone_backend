@@ -1,0 +1,54 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+.box
+{
+    margin: 50px 50px;
+    width: 350px;
+    height: 40px;
+}
+
+.image
+{
+    width: 150px;
+    height: 100px;
+    padding: 15px;
+}
+
+.price
+{
+   color: red;
+}
+
+.view-card
+{
+    border: 20px solid red;
+    margin: 25px;
+    width: 25px;
+    background-color: aqua;
+    color: darkblue;
+    height: 10px;
+}
+
+.details
+{
+    color: blueviolet;
+}
+
+
+.para
+{
+  white-space: nowrap; 
+  width: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #000000;
+}
+
+.para:hover
+{
+    overflow: visible;
+}
