@@ -202,6 +202,9 @@ app.get("/display/books", async function(req, res) {
     res.status(500).json({ message: "Error fetching books", error: error.message });
   }
 });
+app.get("/", (req, res) => {
+  res.send("Backend is running! 🚀");
+});
 
 app.get("/display/books/:id", async function(req, res) {
   const Id = req.params.id;
