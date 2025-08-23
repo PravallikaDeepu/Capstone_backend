@@ -10,8 +10,7 @@ const port = process.env.PORT || 7070;
 app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
 //   origin: "http://localhost:3000", 
-//origin: "*",   
-origin: "https://capstone-frontend-5gqe.onrender.com/",
+  origin: "*",   
   credentials: true            
 }))
 app.use(Bodyparser.json())
