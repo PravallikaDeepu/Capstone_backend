@@ -12,6 +12,7 @@ app.use(CORS({
 //   origin: "http://localhost:3000", 
     
   origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com"],
+     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true            
 }))
 app.use(Bodyparser.json())
