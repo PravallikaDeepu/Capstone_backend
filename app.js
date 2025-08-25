@@ -11,7 +11,7 @@ app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
 //   origin: "http://localhost:3000", 
     
-  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com/"],
+  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com"],
   credentials: true            
 }))
 app.use(Bodyparser.json())
@@ -160,8 +160,10 @@ app.post("/login", async function(req,res)
          console.log(result)
          const token = jwt.sign({email: myEmail}, process.env.JWT_SECRET)
         res.cookie("jwt", token, {
-            maxAge: 360000,
-            httpOnly: true
+             httpOnly: true,
+            secure: true,       
+            sameSite: "None", 
+            maxAge: 360000
         })
                 res.json({message: "Login Successful", user: readData.userName})
 
