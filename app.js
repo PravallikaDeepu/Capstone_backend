@@ -10,8 +10,8 @@ const port = process.env.PORT || 7070;
 app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
 //   origin: "http://localhost:3000", 
- // origin: "*",   
-    origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com"],
+    
+  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com/"],
   credentials: true            
 }))
 app.use(Bodyparser.json())
@@ -20,10 +20,17 @@ app.use(Express.static("public"))
 app.use(cookieParser())
 
 require("dotenv").config()
+
+// Mongoose.connect("mongodb://localhost:27017/Ecommerce_database")
+// // Mongoose.connect(process.env.MONGO_URI)
+// //   .then(() => console.log("Connected to MongoDB Atlas successfully"))
+// //   .catch(err => console.error("Connection error:", err));
+
 // Mongoose.connect("mongodb://localhost:27017/Ecommerce_database")
 Mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB Atlas successfully"))
   .catch(err => console.error("Connection error:", err));
+
 
 function verifyToken(req, res, next) {
     const token = req.cookies.jwt;
@@ -78,8 +85,7 @@ const customerModel = Mongoose.model("customerData", customerSchema)
 
 app.post("/signup", async function(req,res)
 {
-    console.log(req.body)
-
+   console.log(req.body)
     const userName = req.body.user
     const myEmail = req.body.email
     const myPassword = req.body.password
@@ -92,15 +98,16 @@ app.post("/signup", async function(req,res)
 
     
     const readUser = await registerModel.findOne({userName:userName})
+    // console.log(await registerModel.findOne({userName:userName}),"UserName")
     const readEmail = await registerModel.findOne({email:myEmail})
     if(readUser)
     {
-res.send("Username already Present")
+    return res.send("Username already Present")
     }
     if(readEmail)
     {
-        res.send("Email already present")
-        res.redirect("/signup")
+      return res.send("Email already present")
+     
     }
     else
     {
@@ -124,7 +131,9 @@ res.send("Username already Present")
    const token = jwt.sign({email: req.body.email}, process.env.JWT_SECRET)
    res.cookie("jwt", token,{
     httpOnly: true,
-    maxAge: 36000
+    secure: true,        
+  sameSite: "None",    
+  maxAge: 360000
    })
    console.log(token)
 
@@ -286,5 +295,4 @@ app.get("/logout", function(req,res)
 })
 
 app.listen(7070)
-
 
