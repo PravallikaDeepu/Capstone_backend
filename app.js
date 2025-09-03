@@ -11,7 +11,7 @@ app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
 //   origin: "http://localhost:3000", 
     
-  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com/"],
+  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com"],
   credentials: true            
 }))
 app.use(Bodyparser.json())
