@@ -11,8 +11,7 @@ app.use(Express.urlencoded({extended: true}))
 app.use(CORS({
 //   origin: "http://localhost:3000", 
     
-  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com"],
-     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  origin: ["http://localhost:3000", "https://capstone-frontend-5gqe.onrender.com/"],
   credentials: true            
 }))
 app.use(Bodyparser.json())
@@ -161,10 +160,8 @@ app.post("/login", async function(req,res)
          console.log(result)
          const token = jwt.sign({email: myEmail}, process.env.JWT_SECRET)
         res.cookie("jwt", token, {
-             httpOnly: true,
-            secure: true,       
-            sameSite: "None", 
-            maxAge: 360000
+            maxAge: 360000,
+            httpOnly: true
         })
                 res.json({message: "Login Successful", user: readData.userName})
 
@@ -252,7 +249,6 @@ app.post("/save/customer", function(req,res)
         pin:customerPin,
         total: total
     })
-
     data.save()
 })
 
